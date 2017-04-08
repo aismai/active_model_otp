@@ -77,8 +77,7 @@ module ActiveModel
       end
 
       def provisioning_uri(account = nil, options = {})
-        account ||= self.email if self.respond_to?(:email)
-        account ||= ""
+        account ||= self.login if self.respond_to?(:login)
 
         if otp_counter_based
           ROTP::HOTP.new(otp_column, options).provisioning_uri(account)
